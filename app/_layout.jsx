@@ -1,23 +1,22 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, useColorScheme } from "react-native";
 import { Slot, Stack } from "expo-router";
+import { Colors } from "../constants/Colors";
+import { StatusBar } from "expo-status-bar";
 
 const RootLayout = () => {
+  const colorScheme = useColorScheme();
+  const theme = Colors[colorScheme] ?? Colors.light;
+
   return (
     <>
-      {/* Expo router automatically pull the child components here */}
-      {/* <Slot /> */}
-
-      {/* Stack does same as Slot component, additionally adds navigation behavior (eg: back-button, page name to the top-header )*/}
-      {/* <Stack /> */}
-
-      {/* Using for screen options for screen customization */}
-      {/* screenOptions on Root stack - For setting globally for all screens */}
+      {/* Auto-update status-bar light-text in dark-header */}
+      <StatusBar value="auto" />
       <Stack
         screenOptions={{
           headerStyle: {
-            backgroundColor: "#ddd",
+            backgroundColor: theme.navBackground,
           },
-          headerTintColor: "#333",
+          headerTintColor: theme.title,
         }}
       >
         <Stack.Screen name="index" options={{ title: "Home" }} />

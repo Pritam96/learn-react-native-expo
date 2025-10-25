@@ -1,16 +1,21 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, useColorScheme, View } from "react-native";
 import Logo from "../assets/icon.png";
 import { Link } from "expo-router";
+import { Colors } from "../constants/Colors";
 
 const Home = () => {
+  const colorScheme = useColorScheme();
+  const theme = Colors[colorScheme] ?? Colors.light;
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
       <Image source={Logo} style={styles.img} />
-      <Text style={styles.title}>The Heading 1</Text>
-      <Text style={styles.secondaryTitle}>Reading List App</Text>
+      <Text style={[styles.title, { color: theme.text }]}>My Example App</Text>
+      <Text style={[styles.secondaryTitle, { color: theme.text }]}>
+        Reading List App
+      </Text>
 
       <View style={styles.card}>
-        <Text>Hello, this is card</Text>
+        <Text style={[{ color: theme.text }]}>Hello, this is card</Text>
       </View>
 
       <Link href="/about" style={styles.link}>

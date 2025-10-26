@@ -19,12 +19,9 @@ const RootLayout = () => {
           headerTintColor: theme.title,
         }}
       >
+        {/* It removes (auth) from header name of auth routes (login and register) */}
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="index" options={{ title: "Home" }} />
-        <Stack.Screen name="about" options={{ title: "About" }} />
-        <Stack.Screen
-          name="contact"
-          options={{ title: "Contact", headerShown: false }}
-        />
       </Stack>
     </>
   );
@@ -33,13 +30,3 @@ const RootLayout = () => {
 export default RootLayout;
 
 const styles = StyleSheet.create({});
-
-/*
-Stack:
-|
-|
-|
-| about ---->
-| index <---
-------
-*/

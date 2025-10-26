@@ -1,30 +1,42 @@
-import { Image, StyleSheet, Text, useColorScheme, View } from "react-native";
-import Logo from "../assets/icon.png";
+import { StyleSheet, Text, useColorScheme, View } from "react-native";
 import { Link } from "expo-router";
 import { Colors } from "../constants/Colors";
+
+// themed components
+import ThemedView from "../components/ThemedView";
+import ThemedLogo from "../components/ThemedLogo";
+import Spacer from "../components/Spacer";
+import ThemedText from "../components/ThemedText";
+import ThemedCard from "../components/ThemedCard";
 
 const Home = () => {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme] ?? Colors.light;
   return (
-    <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <Image source={Logo} style={styles.img} />
-      <Text style={[styles.title, { color: theme.text }]}>My Example App</Text>
-      <Text style={[styles.secondaryTitle, { color: theme.text }]}>
-        Reading List App
-      </Text>
+    <ThemedView style={styles.container}>
+      <ThemedLogo style={styles.img} />
+      <Spacer height={40} />
 
-      <View style={styles.card}>
-        <Text style={[{ color: theme.text }]}>Hello, this is card</Text>
-      </View>
+      <ThemedText style={styles.title} title={true}>
+        My Example App
+      </ThemedText>
+      <Spacer height={10} />
+
+      <ThemedText>Reading List App</ThemedText>
+      <Spacer />
+
+      <ThemedCard>
+        <ThemedText>Hello, this is card</ThemedText>
+      </ThemedCard>
+      <Spacer />
 
       <Link href="/about" style={styles.link}>
-        About
+        <ThemedText>About</ThemedText>
       </Link>
       <Link href="/contact" style={styles.link}>
-        Contact Us
+        <ThemedText>Contact Us</ThemedText>
       </Link>
-    </View>
+    </ThemedView>
   );
 };
 
@@ -35,25 +47,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center", // horizontal
     justifyContent: "center", // vertical
-    backgroundColor: "#f5f5f7",
   },
   title: {
     fontWeight: "bold",
     fontSize: 18,
   },
-  secondaryTitle: {
-    marginVertical: 20,
-  },
   img: {
     height: 100,
     width: 100,
-    marginVertical: 20,
-  },
-  card: {
-    backgroundColor: "#eee",
-    padding: 20,
-    borderRadius: 5,
-    boxShadow: "4px 4px rgba(0,0,0,0.1)",
   },
   link: {
     marginVertical: 10,

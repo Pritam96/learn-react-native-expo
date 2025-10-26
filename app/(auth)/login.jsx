@@ -1,20 +1,35 @@
-import { StyleSheet } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 import React from "react";
+import { Link } from "expo-router";
 
 // themed components
 import ThemedView from "../../components/ThemedView";
 import Spacer from "../../components/Spacer";
 import ThemedText from "../../components/ThemedText";
-import ThemedCard from "../../components/ThemedCard";
-import { Link } from "expo-router";
+import ThemedButton from "../../components/ThemedButton";
 
 const Login = () => {
+  const handleSubmit = () => {
+    console.log("login form submitted");
+  };
+
   return (
     <ThemedView style={styles.container}>
       <Spacer />
       <ThemedText title={true} style={styles.title}>
         Login to Your Account
       </ThemedText>
+
+      {/* <Pressable
+        onPress={handleSubmit}
+        style={({ pressed }) => [styles.btn, pressed && styles.pressed]}
+      >
+        <Text style={{ color: "#f3f2f2" }}>Login</Text>
+      </Pressable> */}
+
+      <ThemedButton onPress={handleSubmit}>
+        <Text style={{ color: "#f3f2f2" }}>Login</Text>
+      </ThemedButton>
 
       <Spacer height={100} />
       <Link href="/register">
@@ -39,7 +54,3 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
-
-/*
-(auth) - folder name under parentheses represents it is a route folder
-*/

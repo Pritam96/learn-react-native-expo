@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, TextInput } from "react-native";
+import { StyleSheet, Text, TextInput } from "react-native";
 import React, { useState } from "react";
 import { Link } from "expo-router";
 
@@ -8,13 +8,17 @@ import Spacer from "../../components/Spacer";
 import ThemedText from "../../components/ThemedText";
 import ThemedButton from "../../components/ThemedButton";
 import ThemedTextInput from "../../components/ThemedTextInput";
+import { useUser } from "../../hooks/useUser";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { user } = useUser();
+
   const handleSubmit = () => {
-    console.log("login form submitted", email, password);
+    console.log("current user:", user);
+    console.log("login form submitted:", email, password);
   };
 
   return (

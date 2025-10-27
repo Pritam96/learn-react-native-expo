@@ -1,6 +1,8 @@
-import { StyleSheet, Text, TextInput } from "react-native";
-import React, { useState } from "react";
+import { StyleSheet, Text } from "react-native";
+import { useState } from "react";
 import { Link } from "expo-router";
+import { useUser } from "../../hooks/useUser";
+import { Colors } from "../../constants/Colors";
 
 // themed components
 import ThemedView from "../../components/ThemedView";
@@ -8,8 +10,7 @@ import Spacer from "../../components/Spacer";
 import ThemedText from "../../components/ThemedText";
 import ThemedButton from "../../components/ThemedButton";
 import ThemedTextInput from "../../components/ThemedTextInput";
-import { useUser } from "../../hooks/useUser";
-import { Colors } from "../../constants/Colors";
+// import ThemedLoader from "../../components/ThemedLoader";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -63,6 +64,8 @@ const Login = () => {
           Register instead
         </ThemedText>
       </Link>
+
+      {/* <ThemedLoader /> */}
     </ThemedView>
   );
 };

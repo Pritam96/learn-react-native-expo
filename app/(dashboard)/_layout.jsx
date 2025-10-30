@@ -63,6 +63,12 @@ const DashboardLayout = () => {
             ),
           }}
         />
+        <Tabs.Screen
+          name="books/[id]"
+          options={{
+            href: null, // this option removes books/[id] entry from tabs screen
+          }}
+        />
       </Tabs>
     </UserOnly>
   );

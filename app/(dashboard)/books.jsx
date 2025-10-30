@@ -1,17 +1,20 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import { useBooks } from "../../hooks/useBooks";
+import { Colors } from "../../constants/Colors";
+import { useRouter } from "expo-router";
+
 import ThemedView from "../../components/ThemedView";
 import ThemedText from "../../components/ThemedText";
 import ThemedCard from "../../components/ThemedCard";
 import Spacer from "../../components/Spacer";
-import { useBooks } from "../../hooks/useBooks";
-import { Colors } from "../../constants/Colors";
 
 const Books = () => {
   const { books, fetchBooks } = useBooks();
+  const router = useRouter();
 
   const listItemTemplate = (item) => {
     return (
-      <Pressable>
+      <Pressable onPress={() => router.replace(`/books/${item.$id}`)}>
         <ThemedCard style={styles.card}>
           <ThemedText style={styles.title}>{item.title}</ThemedText>
           <ThemedText>Written by {item.author}</ThemedText>

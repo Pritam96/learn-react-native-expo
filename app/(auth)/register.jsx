@@ -23,8 +23,6 @@ const Register = () => {
 
   const { user, register } = useUser();
 
-  console.log("User:", user);
-
   const handleSubmit = async () => {
     setError(null);
     try {

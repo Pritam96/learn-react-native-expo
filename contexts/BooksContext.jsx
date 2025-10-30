@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { databases } from "../lib/appwrite";
+import client, { databases } from "../lib/appwrite";
 import { ID, Permission, Query, Role } from "react-native-appwrite";
 import { useUser } from "../hooks/useUser";
 
@@ -47,7 +47,6 @@ export function BooksProvider({ children }) {
           Permission.delete(Role.user(user.$id)),
         ]
       );
-      fetchBooks();
     } catch (error) {
       console.log(error.message);
     }
@@ -61,8 +60,25 @@ export function BooksProvider({ children }) {
   }
 
   useEffect(() => {
-    if (user) fetchBooks();
-    else setBooks([]); // If we logout, this going to reset the books
+    let unsubscribe;
+    const channel = `databases.${DATABASE_ID}.collections.${COLLECTION_ID}.documents`;
+    if (user) {
+      fetchBooks();
+      // Subscribe to the channel to listen real-time changes
+      unsubscribe = client.subscribe(channel, (response) => {
+        const { payload, events } = response;
+
+        if (events[0].includes("create")) {
+          setBooks((prevBooks) => [...prevBooks, payload]); // payload holds new object
+        }
+      });
+    } else {
+      setBooks([]); // If we logout, this going to reset the books
+    }
+
+    return () => {
+      if (unsubscribe) unsubscribe(); // cleanup - stop listening for changes
+    };
   }, [user]);
 
   return (
